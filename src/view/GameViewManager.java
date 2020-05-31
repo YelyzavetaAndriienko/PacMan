@@ -61,12 +61,14 @@ public class GameViewManager {
 		gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
-
+		gameStage.setResizable(false);
 	}
 
 	public void createNewGame(Stage menuStage) {
 		this.menuStage = menuStage;
 		this.menuStage.hide();
+		this.menuStage.setResizable(false);
+		menuStage.setResizable(false);
 		gameStage.show();
 }
 }
