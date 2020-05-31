@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="50.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="450.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="450.0" layoutX="750.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutY="550.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="50.0" layoutY="150.0" stroke="TRANSPARENT" strokeType="INSIDE" width="250.0">
+     <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="450.0" layoutY="150.0" stroke="TRANSPARENT" strokeType="INSIDE" width="300.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="50.0" layoutY="250.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="50.0" layoutY="350.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="150.0" layoutY="300.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="150.0" layoutY="350.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="100.0" layoutY="500.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+     <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="100.0" layoutY="450.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="300.0" layoutX="350.0" layoutY="100.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="250.0" layoutY="250.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="100.0" layoutX="300.0" layoutY="350.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="250.0" layoutY="500.0" stroke="TRANSPARENT" strokeType="INSIDE" width="148.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="450.0" layoutY="200.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="652.0" layoutY="250.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="150.0" layoutX="700.0" layoutY="250.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="400.0" layoutY="300.0" stroke="TRANSPARENT" strokeType="INSIDE" width="200.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="400.0" layoutY="450.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="450.0" layoutY="400.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="600.0" layoutY="450.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="600.0" layoutY="350.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+     <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="550.0" layoutY="200.0" stroke="TRANSPARENT" strokeType="INSIDE" width="50.0">
+      <effect>
+          <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="50.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/view/resources/pacmanRight.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="698.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/view/resources/exit.png" />
+         </image>
+      </ImageView>
+       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="305.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/view/resources/monster4.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="555.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/view/resources/monster5.gif" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="550.0" layoutY="500.0" stroke="TRANSPARENT" strokeType="INSIDE" width="148.0">
+      <effect>
+            <InnerShadow choke="0.7" color="#ee38c3" height="50.0" radius="24.5" width="50.0" />
+         </effect></Rectangle>
+          <Rectangle arcHeight="5.0" arcWidth="5.0" height="50.0" stroke="BLACK" strokeType="INSIDE" width="800.0">
+         <fill>
+            <RadialGradient centerX="0.523121387283237" centerY="0.5147783251231527" focusDistance="-0.025316455696202556" radius="1.0">
+               <stops>
+                  <Stop color="WHITE" />
+                  <Stop color="#02f0e9" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </fill>
+      </Rectangle>
+      <Label layoutX="320.0" layoutY="-3.0" prefHeight="50.0" prefWidth="200.0" text="  Level 7" textAlignment="CENTER">
+         <font>
+            <Font name="Constantia Bold" size="46.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="140.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="/view/resources/heartMain.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="145.0" layoutY="4.0" prefHeight="28.0" prefWidth="41.0" text="100" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Constantia Bold" size="25.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
