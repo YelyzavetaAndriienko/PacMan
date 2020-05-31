@@ -51,6 +51,10 @@ public class GameViewManager {
 	
 	private void initializeStage() {
 		gamePane = new AnchorPane();
+		gamePane = FXMLLoader.load(getClass()
+                .getResource("/application/level1new.fxml"));
+		gamePane.setStyle("-fx-background-color: transparent; -fx-background-image: url('/view/resources/fon2.gif');");
+		
 		gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
