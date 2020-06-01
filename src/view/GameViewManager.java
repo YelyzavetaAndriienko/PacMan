@@ -5,12 +5,16 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.InfoLabel;
+import model.ScoreLabel;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -83,8 +87,20 @@ public class GameViewManager {
 			}
 		});
 		gamePane.getChildren().add(player);
+
+		Image heart = new Image("view/resources/smallHeart.png");
+     	ImageView heartV = new ImageView(heart);
+     	heartV.setLayoutX(340);
+     	heartV.setLayoutY(0);
+     	gamePane.getChildren().add(heartV);
+		
+		ScoreLabel life = new ScoreLabel("100");
+		life.setLayoutX(360);
+		life.setLayoutY(-187);
+		gamePane.getChildren().add(life);
+		
 		gameStage.setScene(gameScene);
-		gameStage.setResizable(false);
+		//gameStage.setResizable(false);
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
