@@ -17,6 +17,7 @@ public class ScoreLabel extends Label{
 		setTextFill(Color.WHITE);
 	}
 	
+	
 	public void setLabelFont() {
 		setFont(Font.font("Constantia", 40));
 	}
