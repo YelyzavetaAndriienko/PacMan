@@ -31,18 +31,22 @@ public class GameViewManager {
 	private boolean pause = false;
 	private AnimationTimer timer;
 	public static ArrayList<Block> blocks = new ArrayList<>();
+	public static ArrayList<Monster> monsters = new ArrayList<>();
+	public static ArrayList<Bonus> bonuses = new ArrayList<>();
 	private final static int GAME_HEIGHT = 800;
 	private final static int GAME_WIDTH = 800;
 	public final static int BLOCK_SIZE = 40;
 	public final static int CHARACTER_SIZE = 35;
-	public final static int HEART_SIZE = 35;
+	public final static int BONUS_SIZE = 35;
 	private int levelWidth;
 	private int levelNumber = 0;
 	private PacMan player;
 	private Bonus heart;
 	private Bonus star;
-	private Bonus shield;
-	private ScoreLabel life;
+	public static ImageView shield;
+	public static ScoreLabel life;
+	public static boolean hasShield = false;
+	
 	public GameViewManager() throws IOException {
 		initializeStage();
 	}
@@ -66,13 +70,13 @@ public class GameViewManager {
 						Block platformFloor = new Block(Block.BlockType.PLATFORM, j * BLOCK_SIZE, i * BLOCK_SIZE);
 						break;
 					case '2':
-						Block brick = new Block(Block.BlockType.BRICK,j*BLOCK_SIZE,i*BLOCK_SIZE);
+						Monster monster0 = new Monster(Monster.MonsterType.TYPE_0, j * BLOCK_SIZE, i * BLOCK_SIZE);
 						break;
 					case '3':
-						Block bonus = new Block(Block.BlockType.BONUS,j*BLOCK_SIZE,i*BLOCK_SIZE);
+						Bonus bonus1 = new Bonus(Bonus.BonusType.HEART,j*BLOCK_SIZE,i*BLOCK_SIZE);
 						break;
 					case '4':
-						Block stone = new Block(Block.BlockType.STONE,j * BLOCK_SIZE, i * BLOCK_SIZE);
+						Bonus bonus2 = new Bonus(Bonus.BonusType.SHIELD,j*BLOCK_SIZE,i*BLOCK_SIZE);
 						break;
 					case '5':
 						Block PipeTopBlock = new Block(Block.BlockType.PIPE_TOP,j * BLOCK_SIZE, i * BLOCK_SIZE);
@@ -92,10 +96,10 @@ public class GameViewManager {
 		player.setTranslateY(320);
 		gamePane.getChildren().add(player);
 		
-		heart = new Bonus();
-		heart.setTranslateX(281);
-		heart.setTranslateY(240);
-		gamePane.getChildren().add(heart);
+//		heart = new Bonus();
+//		heart.setTranslateX(281);
+//		heart.setTranslateY(240);
+//		gamePane.getChildren().add(heart);
 		
 		Image heartImage = new Image("view/resources/smallHeart.png");
      	ImageView heartV = new ImageView(heartImage);
@@ -103,7 +107,14 @@ public class GameViewManager {
      	heartV.setLayoutY(0);
      	gamePane.getChildren().add(heartV);
 		
-		life = new ScoreLabel("80");
+     	Image shieldImg = new Image("view/resources/b3.png");
+     	shield = new ImageView(shieldImg);
+     	shield.setLayoutX(170);
+     	shield.setLayoutY(0);
+     	shield.setFitWidth(30);
+	    shield.setFitHeight(30);
+     	
+		life = new ScoreLabel("90");
 		life.setLayoutX(360);
 		life.setLayoutY(-187);
 		gamePane.getChildren().add(life);
@@ -138,37 +149,40 @@ public class GameViewManager {
 		
 		
 	private void update(){
+//		for (int i = 0; i < monsters.size(); i++) {
+//			monsters.get(i).move();
+//		}
 		if(Main.isPressed(KeyCode.UP) && player.getTranslateY()>=5){
 			player.setRotate(-90);
 			player.moveY(-5);
-			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-				gamePane.getChildren().remove(heart);
-				heart.heartAction(life);
-			}
+//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
+//				gamePane.getChildren().remove(heart);
+//				heart.heartAction(life);
+//			}
 		}
 		if(Main.isPressed(KeyCode.LEFT) && player.getTranslateX()>=5){
 			player.setRotate(180);
 			player.moveX(-5);
-			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-				gamePane.getChildren().remove(heart);
-				heart.heartAction(life);
-			}
+//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
+//				gamePane.getChildren().remove(heart);
+//				heart.heartAction(life);
+//			}
 		}
 		if(Main.isPressed(KeyCode.RIGHT) && player.getTranslateX()+40 <=levelWidth-5){
 			player.setRotate(0);
 			player.moveX(5);
-			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-				gamePane.getChildren().remove(heart);
-				heart.heartAction(life);
-			}
+//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
+//				gamePane.getChildren().remove(heart);
+//				heart.heartAction(life);
+//			}
 		}
 		if(Main.isPressed(KeyCode.DOWN)) {
 			player.setRotate(90);
 			player.moveY(5);
-			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-				gamePane.getChildren().remove(heart);
-				heart.heartAction(life);
-			}
+//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
+//				gamePane.getChildren().remove(heart);
+//				heart.heartAction(life);
+//			}
 		}
 		/*if (Main.isPressed(KeyCode.SPACE)) {
             if (timer.isRunning()) {
@@ -209,5 +223,12 @@ public class GameViewManager {
 		this.menuStage.setResizable(false);
 		menuStage.setResizable(false);
 		gameStage.show();
-}
+	}
+	
+	public ScoreLabel getLife() {
+		return life;
+	}
+	public void setLife(ScoreLabel life) {
+		this.life = life;
+	}
 }
