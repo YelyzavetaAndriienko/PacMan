@@ -62,8 +62,8 @@ public class ViewManager {
 		createLogo();
 		createBackground();
 		  //bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
-		bip = "view/resources/sound.mp3";
-		     hit = new Media(Paths.get(bip).toUri().toString());
+//		bip = "view/resources/sound.mp3";
+		     hit = new Media(Paths.get("src/view/resources/sound.mp3").toUri().toString());
 		    mediaPlayer = new MediaPlayer(hit);
 		    mediaPlayer.play();
 		    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -218,7 +218,7 @@ public class ViewManager {
 				gameManager.createNewGame(mainStage);
 				mediaPlayer.stop();
 				//bip = "C:\\Users\\Liza\\Downloads\\fon2.mp3";
-				bip = "view/resources/fon2.mp3";
+				bip = "src/view/resources/fon2.mp3";
 				    hit = new Media(Paths.get(bip).toUri().toString());
 				    mediaPlayer = new MediaPlayer(hit);
 				    mediaPlayer.play();

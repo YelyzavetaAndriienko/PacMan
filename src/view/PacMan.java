@@ -30,6 +30,10 @@ public class PacMan extends Pane {
         for(int i = 0; i<Math.abs(value); i++) {
             for (Node platform : GameViewManager.blocks) {
                 if(this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+                	if (((Block) platform).isExit()) {
+                		GameViewManager.changeLevel();
+                		return;
+                	}
                     if (movingRight) {
                         if (this.getTranslateX() + GameViewManager.CHARACTER_SIZE == platform.getTranslateX()){
                             this.setTranslateX(this.getTranslateX() - 1);
@@ -79,6 +83,10 @@ public class PacMan extends Pane {
         for(int i = 0; i < Math.abs(value); i++){
             for(Block platform :GameViewManager.blocks){
                 if(getBoundsInParent().intersects(platform.getBoundsInParent())){
+                	if (((Block) platform).isExit()) {
+                		GameViewManager.changeLevel();
+                		return;
+                	}
                     if(movingDown){
                         if(this.getTranslateY()+ GameViewManager.CHARACTER_SIZE == platform.getTranslateY()){
                             this.setTranslateY(this.getTranslateY()-1);

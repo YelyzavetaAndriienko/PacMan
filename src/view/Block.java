@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 public class Block extends Pane {
     Image blocksImg = new Image(getClass().getResourceAsStream("/view/resources/sprite.png"));
     ImageView block;
+    private boolean exit = false;
     public enum BlockType {
         PLATFORM, BRICK, BONUS, PIPE_TOP, PIPE_BOTTOM, INVISIBLE_BLOCK, STONE
     }
@@ -39,6 +40,7 @@ public class Block extends Pane {
             case INVISIBLE_BLOCK:
                 block.setViewport(new Rectangle2D(0, 0, 16, 16));
                 block.setOpacity(0);
+                exit = true;
                 break;
             case STONE:
                 block.setViewport(new Rectangle2D(0, 16, 16, 16));
@@ -48,4 +50,13 @@ public class Block extends Pane {
         GameViewManager.blocks.add(this);
         GameViewManager.gamePane.getChildren().add(this);
     }
+    
+    public void removeBlock() {
+		 GameViewManager.gamePane.getChildren().remove(this);
+	 }
+
+	public boolean isExit() {
+		return exit;
+	}
+
 }

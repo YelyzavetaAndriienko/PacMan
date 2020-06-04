@@ -129,9 +129,14 @@ public class Monster extends Pane{
 	
 		public void musicMonster(){
 		  //  String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
-		    String bip = "view/resources/monster1.mp3";
+		    String bip = "src/view/resources/monster1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerMonster = new MediaPlayer(hit);
 		    mediaPlayerMonster.play();
+		}
+
+
+		public void removeMonster() {
+			GameViewManager.gamePane.getChildren().remove(this);
 		}
 }
