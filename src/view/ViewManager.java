@@ -1,7 +1,4 @@
 package view;
-
-
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
@@ -48,8 +45,10 @@ public class ViewManager {
 	private PacManSubscene exitSubscene;
 	private PacManSubscene sceneToHide;
 	public boolean isUnmute = true;
-	public MediaPlayer mediaPlayer;
+	public static MediaPlayer mediaPlayer;
 	List<PacManButton> menuButtons;
+	public String bip;
+	public Media hit;
 
 	public ViewManager() {
 		menuButtons = new ArrayList<>();
@@ -62,8 +61,9 @@ public class ViewManager {
 		createMuteButton();
 		createLogo();
 		createBackground();
-		 String bip = "src/view/resources/sound.mp3";
-		    Media hit = new Media(Paths.get(bip).toUri().toString());
+		  //bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
+		bip = "view/resources/sound.mp3";
+		     hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayer = new MediaPlayer(hit);
 		    mediaPlayer.play();
 		    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -216,6 +216,13 @@ public class ViewManager {
 					e.printStackTrace();
 				}
 				gameManager.createNewGame(mainStage);
+				mediaPlayer.stop();
+				//bip = "C:\\Users\\Liza\\Downloads\\fon2.mp3";
+				bip = "view/resources/fon2.mp3";
+				    hit = new Media(Paths.get(bip).toUri().toString());
+				    mediaPlayer = new MediaPlayer(hit);
+				    mediaPlayer.play();
+				    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     	}
     	});
     	return startButton;
