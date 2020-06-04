@@ -1,16 +1,21 @@
 package view;
 
+import java.nio.file.Paths;
+
 import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import model.ScoreLabel;
 
 public class Monster extends Pane{
 	
 	Image monsterImage;
     ImageView imageView;
+    public static MediaPlayer mediaPlayerMonster;
     public enum MonsterType {
         TYPE_0, TYPE_1, TYPE_2, TYPE_3
     }
@@ -91,6 +96,7 @@ public class Monster extends Pane{
     }
 
 	public void hurt(ScoreLabel l) {
+		musicMonster();
 		if (GameViewManager.hasShield) {
 			GameViewManager.gamePane.getChildren().remove(GameViewManager.shield);
 			GameViewManager.hasShield = false;
@@ -120,4 +126,12 @@ public class Monster extends Pane{
 			//end of the game.
 		}
 	}
+	
+		public void musicMonster(){
+		  //  String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
+		    String bip = "view/resources/monster1.mp3";
+		    Media hit = new Media(Paths.get(bip).toUri().toString());
+		    mediaPlayerMonster = new MediaPlayer(hit);
+		    mediaPlayerMonster.play();
+		}
 }
