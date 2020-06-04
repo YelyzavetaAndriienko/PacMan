@@ -17,7 +17,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			ViewManager manager = new ViewManager();
-		//	music();
 			primaryStage = manager.getMainStage();
 			primaryStage.setResizable(false);
 			primaryStage.show();
@@ -31,12 +30,4 @@ public class Main extends Application {
 	}
 	public static boolean isPressed(KeyCode key) {return keys.getOrDefault(key,false);}
 
-	MediaPlayer mediaPlayer;
-	public void music(){
-	    String bip = "src/view/resources/sound.mp3";
-	    Media hit = new Media(Paths.get(bip).toUri().toString());
-	    mediaPlayer = new MediaPlayer(hit);
-	    mediaPlayer.play();
-	    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-	}
 }
