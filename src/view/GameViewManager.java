@@ -2,6 +2,7 @@ package view;
 
 import application.Main;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,8 +15,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Bonus;
+import model.ButtonMute;
 import model.InfoLabel;
 import model.ScoreLabel;
 
@@ -40,11 +43,13 @@ public class GameViewManager {
 	public final static int BONUS_SIZE = 35;
 	private int levelWidth;
 	private int levelNumber = 0;
+	private int levelStatus = 1;
+	public boolean isUnmute = true;
 	private PacMan player;
 	private Bonus heart;
 	private Bonus star;
 	public static ImageView shield;
-	public static ScoreLabel life;
+	public static ScoreLabel life, level;
 	public static boolean hasShield = false;
 	
 	public GameViewManager() throws IOException {
@@ -103,7 +108,7 @@ public class GameViewManager {
 		
 		Image heartImage = new Image("view/resources/smallHeart.png");
      	ImageView heartV = new ImageView(heartImage);
-     	heartV.setLayoutX(340);
+     	heartV.setLayoutX(480);
      	heartV.setLayoutY(0);
      	gamePane.getChildren().add(heartV);
 		
@@ -115,9 +120,16 @@ public class GameViewManager {
 	    shield.setFitHeight(30);
      	
 		life = new ScoreLabel("90");
-		life.setLayoutX(360);
+		life.setLayoutX(500);
 		life.setLayoutY(-187);
 		gamePane.getChildren().add(life);
+		
+		level = new ScoreLabel("Level " + levelStatus);
+		level.setLayoutX(200);
+		level.setLayoutY(-180);
+		gamePane.getChildren().add(level);
+		
+		createMuteButton();
 		
 		gameStage.setScene(gameScene);
 		gameStage.setResizable(false);
@@ -228,7 +240,27 @@ public class GameViewManager {
 	public ScoreLabel getLife() {
 		return life;
 	}
+	
 	public void setLife(ScoreLabel life) {
 		this.life = life;
 	}
+	
+	private void createMuteButton() {
+    	ButtonMute muteButton = new ButtonMute();
+    	muteButton.setLayoutX(10);
+    	muteButton.setLayoutY(5);
+    	gamePane.getChildren().add(muteButton);
+    	muteButton.setOnAction(new EventHandler<ActionEvent>() {
+    		@Override
+    		public void handle(ActionEvent event) {
+    			if(isUnmute==true) {
+    				ViewManager.mediaPlayer.play();
+    				    isUnmute=false;
+    			}else {
+    				ViewManager.mediaPlayer.stop();
+    				 isUnmute=true;
+    			}
+    		}
+    	});
+    }
 }
