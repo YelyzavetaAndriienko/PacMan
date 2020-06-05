@@ -13,9 +13,9 @@ import model.ScoreLabel;
 
 public class Monster extends Pane{
 	
-	Image monsterImage;
-    ImageView imageView;
-    public static MediaPlayer mediaPlayerMonster;
+	Image monsterImage, gameOverImage;
+    ImageView imageView, gameOverImageView;
+    public static MediaPlayer mediaPlayerMonster, mediaPlayerOver;
     public enum MonsterType {
         TYPE_0, TYPE_1, TYPE_2, TYPE_3
     }
@@ -123,15 +123,38 @@ public class Monster extends Pane{
 	        l.setText(textScore);
     	}
 		else {
-			//end of the game.
+			GameViewManager.gamePane.getChildren().clear();
+			GameViewManager.blocks.clear();
+			GameViewManager.monsters.clear();
+			GameViewManager.bonuses.clear();
+			musicOver();
+			gameOverImage = new Image(getClass().getResourceAsStream("/view/resources/gameOver.png"));
+			gameOverImageView = new ImageView(gameOverImage);
+			gameOverImageView.setTranslateX(120);
+	        gameOverImageView.setTranslateY(250);
+			GameViewManager.gamePane.getChildren().add(gameOverImageView);
 		}
 	}
 	
 		public void musicMonster(){
-		  //  String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
-		    String bip = "view/resources/monster1.mp3";
+		    //String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
+		    String bip = "src/view/resources/monster1.mp3";
+		    Media hit = new Media(Paths.get(bip).toUri().toString());
+		    mediaPlayerOver = new MediaPlayer(hit);
+		    mediaPlayerOver.play();
+		}
+		
+		public void musicOver(){
+			ViewManager.mediaPlayer.stop();
+		    //String bip = "C:\\Users\\Liza\\Downloads\\fail1.mp3";
+		    String bip = "src/view/resources/fail1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerMonster = new MediaPlayer(hit);
 		    mediaPlayerMonster.play();
+		}
+
+
+		public void removeMonster() {
+			GameViewManager.gamePane.getChildren().remove(this);
 		}
 }

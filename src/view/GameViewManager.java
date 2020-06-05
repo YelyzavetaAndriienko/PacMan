@@ -42,10 +42,10 @@ public class GameViewManager {
 	public final static int CHARACTER_SIZE = 35;
 	public final static int BONUS_SIZE = 35;
 	private int levelWidth;
-	private int levelNumber = 0;
-	private int levelStatus = 1;
+	private static int levelNumber = 0;
+	private static int levelStatus = 1;
 	public boolean isUnmute = true;
-	private PacMan player;
+	private static PacMan player;
 	private Bonus heart;
 	private Bonus star;
 	public static ImageView shield;
@@ -65,6 +65,41 @@ public class GameViewManager {
 			Main.keys.put(event.getCode(), false);
 		});
 		levelWidth = model.LevelData.levels[levelNumber][0].length()*BLOCK_SIZE;
+		
+		Image shieldImg = new Image("view/resources/b3.png");
+     	shield = new ImageView(shieldImg);
+     	shield.setLayoutX(170);
+     	shield.setLayoutY(5);
+     	shield.setFitWidth(30);
+	    shield.setFitHeight(30);
+		
+		
+		changeLevel();
+		
+		createMuteButton();
+		
+		gameStage.setScene(gameScene);
+		gameStage.setResizable(false);
+		timer = new AnimationTimer() {
+			@Override
+			public void handle(long now) {
+				update();
+			}
+		};
+		timer.start();
+		
+		
+		
+	}
+	
+	static void changeLevel() {
+		String lifeLeft = "90";
+		if (life != null)
+			lifeLeft = life.getText();
+		gamePane.getChildren().clear();
+		blocks.clear();
+		monsters.clear();
+		bonuses.clear();
 		for(int i = 0; i < model.LevelData.levels[levelNumber].length; i++){
 			String line = model.LevelData.levels[levelNumber][i];
 			for(int j = 0; j < line.length(); j++){
@@ -94,32 +129,9 @@ public class GameViewManager {
 						break;
 				}
 			}
-
 		}
-		player = new PacMan();
-		player.setTranslateX(321);
-		player.setTranslateY(320);
-		gamePane.getChildren().add(player);
 		
-//		heart = new Bonus();
-//		heart.setTranslateX(281);
-//		heart.setTranslateY(240);
-//		gamePane.getChildren().add(heart);
-		
-		Image heartImage = new Image("view/resources/smallHeart.png");
-     	ImageView heartV = new ImageView(heartImage);
-     	heartV.setLayoutX(480);
-     	heartV.setLayoutY(0);
-     	gamePane.getChildren().add(heartV);
-		
-     	Image shieldImg = new Image("view/resources/b3.png");
-     	shield = new ImageView(shieldImg);
-     	shield.setLayoutX(170);
-     	shield.setLayoutY(0);
-     	shield.setFitWidth(30);
-	    shield.setFitHeight(30);
-     	
-		life = new ScoreLabel("90");
+		life = new ScoreLabel(lifeLeft);
 		life.setLayoutX(500);
 		life.setLayoutY(-187);
 		gamePane.getChildren().add(life);
@@ -129,19 +141,18 @@ public class GameViewManager {
 		level.setLayoutY(-180);
 		gamePane.getChildren().add(level);
 		
-		createMuteButton();
+		Image heartImage = new Image("view/resources/smallHeart.png");
+     	ImageView heartV = new ImageView(heartImage);
+     	heartV.setLayoutX(480);
+     	heartV.setLayoutY(0);
+     	gamePane.getChildren().add(heartV);
 		
-		gameStage.setScene(gameScene);
-		gameStage.setResizable(false);
-		timer = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				update();
-			}
-		};
-		timer.start();
-		
-		
+		levelStatus++;
+		levelNumber++;
+		player = new PacMan();
+		player.setTranslateX(321);
+		player.setTranslateY(320);
+		gamePane.getChildren().add(player);
 		
 	}
 	/*	gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
