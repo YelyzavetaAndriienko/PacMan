@@ -44,13 +44,15 @@ public class GameViewManager {
 	private int levelWidth;
 	private static int levelNumber = 0;
 	private static int levelStatus = 1;
-	public boolean isUnmute = true;
+	public static boolean isUnmute = true;
 	private static PacMan player;
 	private Bonus heart;
 	private Bonus star;
 	public static ImageView shield;
 	public static ScoreLabel life, level;
 	public static boolean hasShield = false;
+	static Image theEndImage;
+    static ImageView theEndImageView;
 	
 	public GameViewManager() throws IOException {
 		initializeStage();
@@ -76,8 +78,6 @@ public class GameViewManager {
 		
 		changeLevel();
 		
-		createMuteButton();
-		
 		gameStage.setScene(gameScene);
 		gameStage.setResizable(false);
 		timer = new AnimationTimer() {
@@ -100,6 +100,7 @@ public class GameViewManager {
 		blocks.clear();
 		monsters.clear();
 		bonuses.clear();
+		if(levelNumber<7) {
 		for(int i = 0; i < model.LevelData.levels[levelNumber].length; i++){
 			String line = model.LevelData.levels[levelNumber][i];
 			for(int j = 0; j < line.length(); j++){
@@ -131,6 +132,7 @@ public class GameViewManager {
 			}
 		}
 		
+		
 		life = new ScoreLabel(lifeLeft);
 		life.setLayoutX(500);
 		life.setLayoutY(-187);
@@ -140,6 +142,8 @@ public class GameViewManager {
 		level.setLayoutX(200);
 		level.setLayoutY(-180);
 		gamePane.getChildren().add(level);
+		
+		createMuteButton();
 		
 		Image heartImage = new Image("view/resources/smallHeart.png");
      	ImageView heartV = new ImageView(heartImage);
@@ -153,7 +157,14 @@ public class GameViewManager {
 		player.setTranslateX(321);
 		player.setTranslateY(320);
 		gamePane.getChildren().add(player);
-		
+		}else {
+			gamePane.getChildren().clear();
+			theEndImage = new Image("/view/resources/theEnd.png");
+			theEndImageView = new ImageView(theEndImage);
+			theEndImageView.setTranslateX(180);
+			theEndImageView.setTranslateY(300);
+			gamePane.getChildren().add(theEndImageView);
+			}
 	}
 	/*	gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 	        @Override
@@ -256,7 +267,7 @@ public class GameViewManager {
 		this.life = life;
 	}
 	
-	private void createMuteButton() {
+	private static void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
     	muteButton.setLayoutX(10);
     	muteButton.setLayoutY(5);
