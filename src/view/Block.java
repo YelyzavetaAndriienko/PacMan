@@ -4,7 +4,10 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
+/**
+ * class: Block
+ *creates block
+ */
 public class Block extends Pane {
     Image blocksImg = new Image(getClass().getResourceAsStream("/view/resources/sprite.png"));
     ImageView block;
@@ -12,6 +15,13 @@ public class Block extends Pane {
     public enum BlockType {
         PLATFORM, BRICK, BONUS, PIPE_TOP, PIPE_BOTTOM, INVISIBLE_BLOCK, STONE
     }
+    
+/**
+ * constructor
+ * @param blockType
+ * @param x
+ * @param y
+ */
     public Block(BlockType blockType, int x, int y) {
         block = new ImageView(blocksImg);
         block.setFitWidth(GameViewManager.BLOCK_SIZE);
@@ -50,11 +60,18 @@ public class Block extends Pane {
         GameViewManager.blocks.add(this);
         GameViewManager.gamePane.getChildren().add(this);
     }
-    
+ 
+/**
+ * remove block
+ */
     public void removeBlock() {
 		 GameViewManager.gamePane.getChildren().remove(this);
 	 }
 
+/**
+ * return boolean value about exit
+ * @return
+ */
 	public boolean isExit() {
 		return exit;
 	}
