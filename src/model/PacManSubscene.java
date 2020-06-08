@@ -1,7 +1,6 @@
 package model;
 
 import javafx.animation.TranslateTransition;
-import javafx.scene.Parent;
 import javafx.scene.SubScene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -10,12 +9,18 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.util.Duration;
-
+/**
+ * class: PacManSubscene
+ * creates subscenes for game
+ */
 public class PacManSubscene extends SubScene{
 	
 	private final static String BACKGROUND_IMAGE = "model/resources/subfon6.jpg";
 	private boolean isHidden = true;
 	
+/**
+ * constructor
+ */
 	public PacManSubscene() {
 		super(new AnchorPane(), 400, 350);
 		prefWidth(400);
@@ -28,6 +33,9 @@ public class PacManSubscene extends SubScene{
 	
 	}
 
+/**
+ * special move for subscenes when they appear
+ */
 	public void moveSubscene() {
 		TranslateTransition transition = new TranslateTransition();
 		transition.setDuration(Duration.seconds(0.3));
@@ -41,7 +49,11 @@ public class PacManSubscene extends SubScene{
 		}
 		transition.play();
 	}
-	
+
+/**
+ * getPane
+ * @return
+ */
 	public AnchorPane getPane() {
 		return (AnchorPane) this.getRoot();
 	}
