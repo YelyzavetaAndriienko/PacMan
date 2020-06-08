@@ -49,8 +49,8 @@ public class GameViewManager {
 	public static ImageView shield;
 	public static ScoreLabel life, level;
 	public static boolean hasShield = false;
-	static Image theEndImage;
-    static ImageView theEndImageView;
+	static Image theEndImage, restartImage;
+    static ImageView theEndImageView, restartImageView;
 
     public static ImageView mon;
     public static Monster mons;
@@ -147,12 +147,12 @@ public class GameViewManager {
 		
 		life = new ScoreLabel(lifeLeft);
 		life.setLayoutX(470);
-		life.setLayoutY(-189);
+		life.setLayoutY(-185);
 		gamePane.getChildren().add(life);
 		
 		level = new ScoreLabel("Level " + levelStatus);
 		level.setLayoutX(200);
-		level.setLayoutY(-189);
+		level.setLayoutY(-185);
 		gamePane.getChildren().add(level);
 		
 		createMuteButton();
@@ -162,14 +162,14 @@ public class GameViewManager {
      	heartV.setFitWidth(25);
      	heartV.setFitHeight(25);
      	heartV.setLayoutX(480);
-     	heartV.setLayoutY(0);
+     	heartV.setLayoutY(5);
      	gamePane.getChildren().add(heartV);
      	spawnCar();
 		levelStatus++;
 		levelNumber++;
 		player = new PacMan();
 		player.setTranslateX(35);
-		player.setTranslateY(68);
+		player.setTranslateY(70);
 		gamePane.getChildren().add(player);
 		if (hasShield) {
 			gamePane.getChildren().add(shield);
@@ -183,18 +183,35 @@ public class GameViewManager {
 			blocks.clear();
 			monsters.clear();
 			bonuses.clear();
-			theEndImage = new Image("/view/resources/theEnd.png");
-			theEndImageView = new ImageView(theEndImage);
-			theEndImageView.setTranslateX(130);
-			theEndImageView.setTranslateY(250);
-			gamePane.getChildren().add(theEndImageView);
+			restartImage = new Image("/view/resources/restart1.png");
+			restartImageView = new ImageView(restartImage);
+			restartImageView.setFitWidth(100);
+			restartImageView.setFitHeight(100);
+			restartImageView.setTranslateX(310);
+			restartImageView.setTranslateY(530);
+			gamePane.getChildren().add(restartImageView);
 			EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
 				   @Override 
 				   public void handle(MouseEvent e) { 
 					   GameViewManager.restart();
 				   }
 			};
-			theEndImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+			restartImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+			
+			
+			theEndImage = new Image("/view/resources/theEnd.png");
+			theEndImageView = new ImageView(theEndImage);
+			theEndImageView.setTranslateX(130);
+			theEndImageView.setTranslateY(250);
+			
+			gamePane.getChildren().add(theEndImageView);
+			/*EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+				   @Override 
+				   public void handle(MouseEvent e) { 
+					   GameViewManager.restart();
+				   }
+			};
+			theEndImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);*/
 			}
 	}
 	/*	gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -233,35 +250,18 @@ public class GameViewManager {
 		if(Main.isPressed(KeyCode.UP) && player.getTranslateY()>=5){
 			player.setRotate(-90);
 			player.moveY(-5);
-//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-//				gamePane.getChildren().remove(heart);
-//				heart.heartAction(life);
-//			}
 		}
 		if(Main.isPressed(KeyCode.LEFT) && player.getTranslateX()>=5){
 			player.setRotate(180);
 			player.moveX(-5);
-//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-//				gamePane.getChildren().remove(heart);
-//				heart.heartAction(life);
-//			}
 		}
 		if(Main.isPressed(KeyCode.RIGHT) && player.getTranslateX()+40 <=levelWidth-5){
 			player.setRotate(0);
 			player.moveX(5);
-//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-//				gamePane.getChildren().remove(heart);
-//				heart.heartAction(life);
-//			}
 		}
 		if(Main.isPressed(KeyCode.DOWN)) {
 			player.setRotate(90);
 			player.moveY(5);
-			
-//			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
-//				gamePane.getChildren().remove(heart);
-//				heart.heartAction(life);
-//			}
 		}
 		/*if (Main.isPressed(KeyCode.SPACE)) {
             if (timer.isRunning()) {
@@ -331,7 +331,7 @@ public class GameViewManager {
 	private static void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
     	muteButton.setLayoutX(5);
-    	muteButton.setLayoutY(0);
+    	muteButton.setLayoutY(2);
     	gamePane.getChildren().add(muteButton);
     	muteButton.setOnAction(new EventHandler<ActionEvent>() {
     		@Override
@@ -340,7 +340,7 @@ public class GameViewManager {
     				ViewManager.mediaPlayer.play();
     				    isUnmute=false;
     			}else {
-    				ViewManager.mediaPlayer.stop();
+    				ViewManager.mediaPlayer.pause();
     				 isUnmute=true;
     			}
     		}
@@ -351,8 +351,8 @@ public class GameViewManager {
  * adds music for shield	
  */
 			public static void musicWin(){
-				  //  String bip = "C:\\Users\\Liza\\Downloads\\win2.mp3";
-					String bip = "src/view/resources/win2.mp3";
+				   // String bip = "C:\\Users\\Liza\\Downloads\\win2.mp3";
+			          String bip = "src/view/resources/win2.mp3";
 				    Media hit = new Media(Paths.get(bip).toUri().toString());
 				    mediaPlayerWin = new MediaPlayer(hit);
 				  mediaPlayerWin.play();
@@ -366,8 +366,8 @@ public class GameViewManager {
 				String lifeLeft = "100";
 				life.setText(lifeLeft);
 				hasShield = false;
-//				levelNumber = 0;
-//				levelStatus = 1;
+				levelNumber = 0;
+				levelStatus = 1;
 				player = null;
 				
 				ViewManager view = new ViewManager();
