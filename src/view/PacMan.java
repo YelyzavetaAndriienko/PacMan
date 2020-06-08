@@ -1,30 +1,35 @@
 package view;
 
-import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-
 import javafx.geometry.Point2D;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import model.Bonus;
 import view.GameViewManager;
-import view.ViewManager;
-
-
+/**
+ * class: PacMan
+ *creates main player
+ */
 public class PacMan extends Pane {
     Image pacmanImage = new Image(getClass().getResourceAsStream("/model/resources/pacmanRight.gif"));
     ImageView imageView = new ImageView(pacmanImage);
     public Point2D pacmanVelocity = new Point2D(0,0);
 
+/**
+ * constructor
+ */
     public PacMan() {
         imageView.setFitWidth(GameViewManager.CHARACTER_SIZE);
         imageView.setFitHeight(GameViewManager.CHARACTER_SIZE);
         getChildren().addAll(this.imageView);
     }
 
+/**
+ * move of X coordinate
+ * @param value
+ */
     public void moveX(int value) {
         boolean movingRight = value > 0;
         for(int i = 0; i<Math.abs(value); i++) {
@@ -78,6 +83,11 @@ public class PacMan extends Pane {
             this.setTranslateX(this.getTranslateX() + (movingRight ? 1 : -1));
         }
     }
+    
+/**
+ * move of Y coordinate
+ * @param value
+ */
     public void moveY(int value){
         boolean movingDown = value > 0;
         for(int i = 0; i < Math.abs(value); i++){
