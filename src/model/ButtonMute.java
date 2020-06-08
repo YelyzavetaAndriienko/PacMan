@@ -6,10 +6,16 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-
+/**
+ * class: ButtonMute
+ * creates button for sound
+ */
 public class ButtonMute extends Button{
 	private final String BUTTON_FREE_STYLE ="-fx-background-color: transparent; -fx-background-image: url('/model/resources/newMute.png');";
-	
+
+/**
+ * constructor
+ */
 	public ButtonMute() {
 		setPrefWidth(30);
 		setPrefHeight(30);
@@ -17,18 +23,27 @@ public class ButtonMute extends Button{
 		initializeButtonListeners();
 	}
 
+/**
+ * set pressed style for button
+ */
 	private void setButtonPressedStyle() {
 		setStyle(BUTTON_FREE_STYLE);
 		setPrefHeight(25);
 		setLayoutY(getLayoutY() + 4);
 	}
 	
+/**
+ * set released style for button
+ */
 	private void setButtonReleasedStyle() {
 		setStyle(BUTTON_FREE_STYLE);
 		setPrefHeight(30);
 		setLayoutY(getLayoutY() - 4);
 	}
-	
+
+/**
+ * add listeners
+ */
 	private void initializeButtonListeners() {
 		setOnMousePressed(new EventHandler<MouseEvent>() {
     		@Override
