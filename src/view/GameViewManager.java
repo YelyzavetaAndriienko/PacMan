@@ -4,27 +4,26 @@ import application.Main;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.Bonus;
 import model.ButtonMute;
-import model.InfoLabel;
 import model.ScoreLabel;
-
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
-
+/**
+ * class: GameViewManager
+ *creates panel for game
+ */
 public class GameViewManager {
 
 	public static AnchorPane gamePane;
@@ -46,17 +45,29 @@ public class GameViewManager {
 	private static int levelStatus = 1;
 	public static boolean isUnmute = true;
 	private static PacMan player;
-	private Bonus heart;
-	private Bonus star;
 	public static ImageView shield;
 	public static ScoreLabel life, level;
 	public static boolean hasShield = false;
 	static Image theEndImage;
     static ImageView theEndImageView;
+
+    public static ImageView mon;
+    public static Monster mons;
+    public static MediaPlayer mediaPlayerWin;
+
 	
+/**
+ * constructor
+ * @throws IOException
+ */
 	public GameViewManager() throws IOException {
 		initializeStage();
 	}
+	
+/**
+ * initializeStage - main method
+ * @throws IOException
+ */
 	private void initializeStage() throws IOException {
 		gamePane = new AnchorPane();
 		gamePane.setStyle("-fx-background-color: transparent; -fx-background-image: url('/view/resources/fon2.gif');");
@@ -75,7 +86,6 @@ public class GameViewManager {
      	shield.setFitWidth(30);
 	    shield.setFitHeight(30);
 		
-		
 		changeLevel();
 		
 		gameStage.setScene(gameScene);
@@ -86,14 +96,14 @@ public class GameViewManager {
 				update();
 			}
 		};
-		timer.start();
-		
-		
-		
+		timer.start();	
 	}
 	
+/**
+ * allows to move to the next level
+ */
 	static void changeLevel() {
-		String lifeLeft = "90";
+		String lifeLeft = "100";
 		if (life != null)
 			lifeLeft = life.getText();
 		gamePane.getChildren().clear();
@@ -114,16 +124,16 @@ public class GameViewManager {
 						Monster monster0 = new Monster(Monster.MonsterType.TYPE_0, j * BLOCK_SIZE, i * BLOCK_SIZE);
 						break;
 					case '3':
-						Bonus bonus1 = new Bonus(Bonus.BonusType.HEART,j*BLOCK_SIZE,i*BLOCK_SIZE);
+						Monster monster1 = new Monster(Monster.MonsterType.TYPE_1, j * BLOCK_SIZE, i * BLOCK_SIZE);
 						break;
 					case '4':
-						Bonus bonus2 = new Bonus(Bonus.BonusType.SHIELD,j*BLOCK_SIZE,i*BLOCK_SIZE);
+						Monster monster2 = new Monster(Monster.MonsterType.TYPE_2, j * BLOCK_SIZE, i * BLOCK_SIZE);
 						break;
 					case '5':
-						Block PipeTopBlock = new Block(Block.BlockType.PIPE_TOP,j * BLOCK_SIZE, i * BLOCK_SIZE);
+						Bonus bonus1 = new Bonus(Bonus.BonusType.HEART,j*BLOCK_SIZE,i*BLOCK_SIZE);
 						break;
 					case '6':
-						Block PipeBottomBlock = new Block(Block.BlockType.PIPE_BOTTOM,j * BLOCK_SIZE, i * BLOCK_SIZE);
+						Bonus bonus2 = new Bonus(Bonus.BonusType.SHIELD,j*BLOCK_SIZE,i*BLOCK_SIZE);
 						break;
 					case '*':
 						Block InvisibleBlock = new Block(Block.BlockType.INVISIBLE_BLOCK,j * BLOCK_SIZE, i * BLOCK_SIZE);
@@ -135,12 +145,12 @@ public class GameViewManager {
 		
 		life = new ScoreLabel(lifeLeft);
 		life.setLayoutX(500);
-		life.setLayoutY(-187);
+		life.setLayoutY(-185);
 		gamePane.getChildren().add(life);
 		
 		level = new ScoreLabel("Level " + levelStatus);
 		level.setLayoutX(200);
-		level.setLayoutY(-180);
+		level.setLayoutY(-185);
 		gamePane.getChildren().add(level);
 		
 		createMuteButton();
@@ -150,15 +160,19 @@ public class GameViewManager {
      	heartV.setLayoutX(480);
      	heartV.setLayoutY(0);
      	gamePane.getChildren().add(heartV);
-		
+     	spawnCar();
 		levelStatus++;
 		levelNumber++;
 		player = new PacMan();
-		player.setTranslateX(321);
-		player.setTranslateY(320);
+		player.setTranslateX(41);
+		player.setTranslateY(81);
 		gamePane.getChildren().add(player);
 		}else {
 			gamePane.getChildren().clear();
+
+			ViewManager.mediaPlayer.stop();
+			musicWin();
+
 			theEndImage = new Image("/view/resources/theEnd.png");
 			theEndImageView = new ImageView(theEndImage);
 			theEndImageView.setTranslateX(180);
@@ -180,12 +194,25 @@ public class GameViewManager {
 	        }
 	    });
 	}*/
-		
+	 private static void spawnCar() {
+		//	 mons = new Monster(Monster.MonsterType.TYPE_0, BLOCK_SIZE, 2*BLOCK_SIZE);
+		//	 gamePane.getChildren().add(mons);
+		 
+	    }
+
+	    
 		
 	private void update(){
+		//mons.moveX();
+		//mons.moveY();
 //		for (int i = 0; i < monsters.size(); i++) {
 //			monsters.get(i).move();
 //		}
+		//mon.setTranslateX(mon.getTranslateX() + Math.random() * 10);
+		//if(mons.getTranslateX()+40 <=levelWidth-5){
+     //   mons.moveX((int)player.getTranslateX());
+     //   mons.moveY((int)player.getTranslateY());
+		//}
 		if(Main.isPressed(KeyCode.UP) && player.getTranslateY()>=5){
 			player.setRotate(-90);
 			player.moveY(-5);
@@ -213,6 +240,7 @@ public class GameViewManager {
 		if(Main.isPressed(KeyCode.DOWN)) {
 			player.setRotate(90);
 			player.moveY(5);
+			
 //			if(heart.getTranslateX()==player.getTranslateX() & heart.getTranslateY()==player.getTranslateY()) {
 //				gamePane.getChildren().remove(heart);
 //				heart.heartAction(life);
@@ -250,7 +278,11 @@ public class GameViewManager {
 	        alert.setContentText("To start again, press 'Space'");
 	        alert.show();
 	    }
-	 
+
+/**
+ * creates new game
+ * @param menuStage
+ */
 	public void createNewGame(Stage menuStage) {
 		this.menuStage = menuStage;
 		this.menuStage.hide();
@@ -259,14 +291,26 @@ public class GameViewManager {
 		gameStage.show();
 	}
 	
+/**
+ * return life
+ * @return
+ */
 	public ScoreLabel getLife() {
 		return life;
 	}
-	
+
+/**
+ * set life for pacman
+ * @param life
+ */
 	public void setLife(ScoreLabel life) {
 		this.life = life;
 	}
-	
+
+/**
+ * creates mute button
+ */
+
 	private static void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
     	muteButton.setLayoutX(10);
@@ -285,4 +329,15 @@ public class GameViewManager {
     		}
     	});
     }
+	
+/**
+ * adds music for shield	
+ */
+			public static void musicWin(){
+				  //  String bip = "C:\\Users\\Liza\\Downloads\\win2.mp3";
+					String bip = "src/view/resources/win2.mp3";
+				    Media hit = new Media(Paths.get(bip).toUri().toString());
+				    mediaPlayerWin = new MediaPlayer(hit);
+				  mediaPlayerWin.play();
+				}
 }

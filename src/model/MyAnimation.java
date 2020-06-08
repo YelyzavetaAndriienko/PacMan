@@ -6,7 +6,10 @@ import javafx.animation.Transition;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-
+/**
+ * class: MyAnimation
+ * create animation for game
+ */
 public class MyAnimation extends Transition{
     private final ImageView imageView;
     private final int count;
@@ -16,6 +19,17 @@ public class MyAnimation extends Transition{
     private final int width;
     private final int height;
 
+/**
+ * constructor
+ * @param imageView
+ * @param duration
+ * @param count
+ * @param columns
+ * @param offsetX
+ * @param offsetY
+ * @param width
+ * @param height
+ */
     public MyAnimation(ImageView imageView, Duration duration, int count, int columns,int offsetX, int offsetY,
     		int width, int height){
         this.imageView = imageView;
@@ -31,12 +45,26 @@ public class MyAnimation extends Transition{
         this.imageView.setViewport(new Rectangle2D(offsetX, offsetY, width, height));
 
     }
+    
+/**
+ * set offset X
+ * @param x
+ */
     public void setOffsetX(int x){
         this.offsetX = x;
     }
+  
+/**
+ * set offset Y
+ * @param y
+ */
     public void setOffsetY(int y){
         this.offsetY = y;
     }
+   
+/**
+ * interpolate
+ */
     protected void interpolate(double frac) {
         final int index = Math.min((int)Math.floor(count*frac), count-1);
         final int x = (index%columns)*width+offsetX;

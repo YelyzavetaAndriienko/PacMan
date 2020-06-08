@@ -1,17 +1,12 @@
 package view;
+
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -29,7 +24,10 @@ import model.ButtonMute;
 import model.InfoLabel;
 import model.PacManButton;
 import model.PacManSubscene;
-
+/**
+ * class: ViewManager
+ *creates components for main menu
+ */
 public class ViewManager {
 
 	private final static int HEIGHT = 600;
@@ -50,6 +48,9 @@ public class ViewManager {
 	public String bip;
 	public Media hit;
 
+/**
+ * constructor
+ */
 	public ViewManager() {
 		menuButtons = new ArrayList<>();
 		mainPane = new AnchorPane();
@@ -61,18 +62,27 @@ public class ViewManager {
 		createMuteButton();
 		createLogo();
 		createBackground();
-		  //bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
-//		bip = "view/resources/sound.mp3";
+		//  bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
+		bip = "view/resources/sound.mp3";
 		     hit = new Media(Paths.get("src/view/resources/sound.mp3").toUri().toString());
+		   hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayer = new MediaPlayer(hit);
 		    mediaPlayer.play();
 		    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		}
 
+/**
+ * getMainStage
+ * @return
+ */
     public Stage getMainStage() {
     	return mainStage;
     }
 
+/**
+ * showSubscene
+ * @param subscene
+ */
     private void showSubscene(PacManSubscene subscene) {
     	if(sceneToHide != null) {
     		sceneToHide.moveSubscene();
@@ -81,6 +91,9 @@ public class ViewManager {
     	sceneToHide = subscene;
     }
 
+/**
+ * create subscenes
+ */
     private void createSubscenes() {
     	createStartSubscene();
 
@@ -92,6 +105,10 @@ public class ViewManager {
     	mainPane.getChildren().add(exitSubscene);
     }
 
+/**
+ * addMenuButton
+ * @param button
+ */
     private void addMenuButton(PacManButton button) {
     	button.setLayoutX(MENU_BUTTONS_START_X);
     	button.setLayoutY(MENU_BUTTONS_START_Y + menuButtons.size() * 100);
@@ -99,6 +116,9 @@ public class ViewManager {
     	mainPane.getChildren().add(button);
     }
 
+/**
+ * createButtons
+ */
     private void createButtons() {
     	createStartButton();
     	createHelpButton();
@@ -106,12 +126,22 @@ public class ViewManager {
     	createExitButton();
     }
 
+/**
+ * createStartSubscene
+ */
     private void createStartSubscene() {
     	startSubscene = new PacManSubscene();
     	mainPane.getChildren().add(startSubscene);
+    	InfoLabel startLabel = new InfoLabel("Are you READY ?");
+    	startLabel.setLayoutX(80);
+    	startLabel.setLayoutY(-70);
+    	startSubscene.getPane().getChildren().add(startLabel);
     	startSubscene.getPane().getChildren().add(createButtonToStart());
     }
 
+/**
+ * createHelpSubscene
+ */
     private void createHelpSubscene() {
     	helpSubscene = new PacManSubscene();
     	mainPane.getChildren().add(helpSubscene);
@@ -135,7 +165,6 @@ public class ViewManager {
      	InfoLabel green = new InfoLabel("GREEN");
      	green.setLayoutX(50);
      	green.setLayoutY(-80);
-    	//green.setTooltip(new Tooltip("This is a label"));
     	helpSubscene.getPane().getChildren().add(green);
 
      	Image image1 = new Image("view/resources/m1.gif");
@@ -148,7 +177,6 @@ public class ViewManager {
      	purple.setLayoutX(150);
      	purple.setLayoutY(-80);
     	helpSubscene.getPane().getChildren().add(purple);
-    	//purple.setTooltip(new Tooltip("This is a label"));
 
      	Image image2 = new Image("view/resources/m2.gif");
      	ImageView img2 = new ImageView(image2);
@@ -160,7 +188,6 @@ public class ViewManager {
      	red.setLayoutX(260);
      	red.setLayoutY(-80);
     	helpSubscene.getPane().getChildren().add(red);
-    	//red.setTooltip(new Tooltip("This is a label"));
 
      	Image image3 = new Image("view/resources/m3.gif");
      	ImageView img3 = new ImageView(image3);
@@ -192,6 +219,9 @@ public class ViewManager {
      	helpSubscene.getPane().getChildren().add(img33);
     }
 
+/**
+ * createCreditsSubscene
+ */
     private void createCreditsSubscene() {
     	creditsSubscene = new PacManSubscene();
     	mainPane.getChildren().add(creditsSubscene);
@@ -202,10 +232,14 @@ public class ViewManager {
     	creditsSubscene.getPane().getChildren().add(creditsLabel);
     }
 
+/**
+ * createButtonToStart
+ * @return
+ */
     private PacManButton createButtonToStart() {
     	PacManButton startButton = new PacManButton("START");
     	startButton.setLayoutX(100);
-    	startButton.setLayoutY(150);
+    	startButton.setLayoutY(250);
     	startButton.setOnAction(new EventHandler<ActionEvent>() {
     		@Override
     		public void handle(ActionEvent event) {
@@ -228,6 +262,9 @@ public class ViewManager {
     	return startButton;
     }
 
+/**
+ * createStartButton
+ */
     private void createStartButton() {
     	PacManButton startButton = new PacManButton("PLAY");
     	addMenuButton(startButton);
@@ -239,6 +276,9 @@ public class ViewManager {
     	});
     }
 
+/**
+ * createHelpButton
+ */
     private void createHelpButton() {
     	PacManButton helpButton = new PacManButton("HELP");
     	addMenuButton(helpButton);
@@ -250,6 +290,9 @@ public class ViewManager {
     	});
     }
 
+/**
+ * createCreditsButton
+ */
     private void createCreditsButton() {
     	PacManButton creditsButton = new PacManButton("CREDITS");
     	addMenuButton(creditsButton);
@@ -261,6 +304,9 @@ public class ViewManager {
     	});
     }
 
+/**
+ * createExitButton
+ */
     private void createExitButton() {
     	PacManButton exitButton = new PacManButton("EXIT");
     	addMenuButton(exitButton);
@@ -272,6 +318,9 @@ public class ViewManager {
     	});
     }
 
+/**
+ * createMuteButton
+ */
     private void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
     	muteButton.setLayoutX(10);
@@ -291,13 +340,18 @@ public class ViewManager {
     	});
     }
 
-
+/**
+ * createBackground
+ */
     private void createBackground() {
     	Image backgroundImage = new Image("view/resources/fon2.gif", 256, 256, false, true);
     	BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
     	mainPane.setBackground(new Background(background));
     }
 
+/**
+ * createLogo
+ */
     private void createLogo() {
         Image image = new Image("view/resources/logo1.png");
     	ImageView img = new ImageView(image);

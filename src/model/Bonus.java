@@ -111,8 +111,9 @@ public class Bonus extends Pane {
  * add music for heart
  */
 		public void musicBonusHeart(){
-		   //String bip = "C:\\Users\\Liza\\Downloads\\bonusSound2.mp3";
-		String bip = "src/view/resources/bonusSound2.mp3";
+		  // String bip = "C:\\Users\\Liza\\Downloads\\bonusSound2.mp3";
+			String bip = "src/view/resources/bonusSound2.mp3";
+
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerBonusHeart = new MediaPlayer(hit);
 		    mediaPlayerBonusHeart.play();
@@ -122,7 +123,9 @@ public class Bonus extends Pane {
  * adds music for shield	
  */
 		public void musicBonusShield(){
+
 			 //   String bip = "C:\\Users\\Liza\\Downloads\\bonusSound1.mp3";
+
 				String bip = "src/view/resources/bonusSound1.mp3";
 			    Media hit = new Media(Paths.get(bip).toUri().toString());
 			    mediaPlayerBonusShield = new MediaPlayer(hit);
