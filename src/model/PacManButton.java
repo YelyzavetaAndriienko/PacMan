@@ -1,21 +1,24 @@
 package model;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Font;
-
+/**
+ * class: PacManButton
+ *create special style for buttons
+ */
 public class PacManButton extends Button{
 
 	private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent; -fx-background-image: url('/model/resources/button2Pressed.png');";
 	private final String BUTTON_FREE_STYLE ="-fx-background-color: transparent; -fx-background-image: url('/model/resources/button2.png');";
 	
+/**
+ * constructor
+ * @param text
+ */
 	public PacManButton(String text) {
 		setText(text);
 		setButtonFont();
@@ -24,23 +27,35 @@ public class PacManButton extends Button{
 		setStyle(BUTTON_FREE_STYLE);
 		initializeButtonListeners();
 	}
-	
+
+/**
+ * set font
+ */
 	private void setButtonFont() {
 			setFont(Font.font("Constantia", 23));
 	}
-	
+
+/**
+ * set pressed style for button
+ */
 	private void setButtonPressedStyle() {
 		setStyle(BUTTON_PRESSED_STYLE);
 		setPrefHeight(45);
 		setLayoutY(getLayoutY() + 4);
 	}
-	
+
+/**
+ * set released style for button
+ */
 	private void setButtonReleasedStyle() {
 		setStyle(BUTTON_FREE_STYLE);
 		setPrefHeight(49);
 		setLayoutY(getLayoutY() - 4);
 	}
-	
+
+/**
+ * adds listeners
+ */
 	private void initializeButtonListeners() {
 		setOnMousePressed(new EventHandler<MouseEvent>() {
     		@Override
