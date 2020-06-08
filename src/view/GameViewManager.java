@@ -50,9 +50,11 @@ public class GameViewManager {
 	public static boolean hasShield = false;
 	static Image theEndImage;
     static ImageView theEndImageView;
+
     public static ImageView mon;
     public static Monster mons;
     public static MediaPlayer mediaPlayerWin;
+
 	
 /**
  * constructor
@@ -140,6 +142,7 @@ public class GameViewManager {
 			}
 		}
 		
+		
 		life = new ScoreLabel(lifeLeft);
 		life.setLayoutX(500);
 		life.setLayoutY(-185);
@@ -166,8 +169,10 @@ public class GameViewManager {
 		gamePane.getChildren().add(player);
 		}else {
 			gamePane.getChildren().clear();
+
 			ViewManager.mediaPlayer.stop();
 			musicWin();
+
 			theEndImage = new Image("/view/resources/theEnd.png");
 			theEndImageView = new ImageView(theEndImage);
 			theEndImageView.setTranslateX(180);
@@ -301,10 +306,11 @@ public class GameViewManager {
 	public void setLife(ScoreLabel life) {
 		this.life = life;
 	}
-	
+
 /**
  * creates mute button
  */
+
 	private static void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
     	muteButton.setLayoutX(10);
