@@ -1,8 +1,6 @@
 package view;
 
 import java.nio.file.Paths;
-
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +8,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.ScoreLabel;
-
+/**
+ * class: Monster
+ *creates monster
+ */
 public class Monster extends Pane{
 	
 	Image monsterImage, gameOverImage;
@@ -21,6 +22,12 @@ public class Monster extends Pane{
     }
     private MonsterType type;
 
+/**
+ * constructor
+ * @param typeM
+ * @param x
+ * @param y
+ */
     public Monster(MonsterType typeM, int x, int y) {
     	type = typeM;
     	switch (typeM) {
@@ -37,7 +44,7 @@ public class Monster extends Pane{
     	    imageView = new ImageView(monsterImage);
     	    break;
     	case TYPE_3:
-    		monsterImage = new Image(getClass().getResourceAsStream("/model/resources/monster6.gif"));
+    		monsterImage = new Image(getClass().getResourceAsStream("/model/resources/monster3.gif"));
     	    imageView = new ImageView(monsterImage);
     	    break;
     	}
@@ -47,11 +54,91 @@ public class Monster extends Pane{
         setTranslateY(y);
         getChildren().addAll(this.imageView);
         GameViewManager.monsters.add(this);
-        GameViewManager.gamePane.getChildren().add(this);
+       GameViewManager.gamePane.getChildren().add(this);
     }
     
- 
-	public void moveX(int value) {
+    public void moveX() {
+        boolean movingRight = true;
+        for(int i = 0; i<1; i++) {
+            for (Node platform : GameViewManager.blocks) {
+                if(this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
+                    if (movingRight) {
+                        if (this.getTranslateX() + GameViewManager.CHARACTER_SIZE == platform.getTranslateX()){
+                            this.setTranslateX(this.getTranslateX() - 1);
+                            movingRight = false;
+                            return;
+                        }else {
+                        	this.setTranslateX(this.getTranslateX() + 1);
+                        	movingRight = true;
+                            return;
+                        }
+                    } else {
+                        if (this.getTranslateX() == platform.getTranslateX() + GameViewManager.BLOCK_SIZE) {
+                            this.setTranslateX(this.getTranslateX() + 1);
+                            movingRight = true;
+                            return;
+                        }else {
+                        	this.setTranslateX(this.getTranslateX() - 1);
+                            movingRight = false;
+                            return;
+                        }
+                    }
+                }
+            }
+            if (movingRight) {
+            this.setTranslateX(this.getTranslateX() + 1);
+            }
+        }
+    }
+    
+    public void moveY(){
+        boolean movingDown = true;
+        boolean movingUp = false;
+        for(int i = 0; i < 1; i++){
+            for(Block platform :GameViewManager.blocks){
+                if(getBoundsInParent().intersects(platform.getBoundsInParent())){
+                    if(movingDown){
+                        if(this.getTranslateY()+ GameViewManager.CHARACTER_SIZE == platform.getTranslateY()){
+                            this.setTranslateY(this.getTranslateY()-1);
+                            movingUp = true;
+                            movingDown = false;
+                            return;
+                        }else {
+                        	this.setTranslateY(this.getTranslateY() + 1);
+                        	movingDown = true;
+                        	movingUp = false;
+                            return;
+                        }
+                    }
+                    else{
+                        if(this.getTranslateY() == platform.getTranslateY()+ GameViewManager.BLOCK_SIZE){
+                            this.setTranslateY(this.getTranslateY()+1);
+                            movingDown = true;
+                            movingUp = false;
+                            return;
+                        }else {
+                        	this.setTranslateY(this.getTranslateY() - 1);
+                        	movingUp = true;
+                        	movingDown = false;
+                            return;
+                        }
+                    }
+                }
+            }
+            if (movingDown) {
+                this.setTranslateY(this.getTranslateX() + 1);
+                }
+                if (movingUp) {
+                    this.setTranslateY(this.getTranslateX() - 1);
+                    }
+        }
+    }
+    
+/**
+ * move of X coordinate
+ * @param value
+ */
+	/*public void moveX(int value) {
         boolean movingRight = value > 0;
         for(int i = 0; i<Math.abs(value); i++) {
             for (Node platform : GameViewManager.blocks) {
@@ -60,10 +147,16 @@ public class Monster extends Pane{
                         if (this.getTranslateX() + GameViewManager.CHARACTER_SIZE == platform.getTranslateX()){
                             this.setTranslateX(this.getTranslateX() - 1);
                             return;
+                        }else {
+                        	this.setTranslateX(this.getTranslateX() + 1);
+                            return;
                         }
                     } else {
                         if (this.getTranslateX() == platform.getTranslateX() + GameViewManager.BLOCK_SIZE) {
                             this.setTranslateX(this.getTranslateX() + 1);
+                            return;
+                        }else {
+                        	this.setTranslateX(this.getTranslateX() - 1);
                             return;
                         }
                     }
@@ -71,8 +164,13 @@ public class Monster extends Pane{
             }
             this.setTranslateX(this.getTranslateX() + (movingRight ? 1 : -1));
         }
-    }
-    public void moveY(int value){
+    }*/
+    
+/**
+ * move of Y coordinate    
+ * @param value
+ */
+   /* public void moveY(int value){
         boolean movingDown = value > 0;
         for(int i = 0; i < Math.abs(value); i++){
             for(Block platform :GameViewManager.blocks){
@@ -81,11 +179,17 @@ public class Monster extends Pane{
                         if(this.getTranslateY()+ GameViewManager.CHARACTER_SIZE == platform.getTranslateY()){
                             this.setTranslateY(this.getTranslateY()-1);
                             return;
+                        }else {
+                        	this.setTranslateY(this.getTranslateY() + 1);
+                            return;
                         }
                     }
                     else{
                         if(this.getTranslateY() == platform.getTranslateY()+ GameViewManager.BLOCK_SIZE){
                             this.setTranslateY(this.getTranslateY()+1);
+                            return;
+                        }else {
+                        	this.setTranslateY(this.getTranslateY() - 1);
                             return;
                         }
                     }
@@ -94,6 +198,7 @@ public class Monster extends Pane{
             this.setTranslateY(this.getTranslateY() + (movingDown?1:-1));
         }
     }
+   */ 
 
 	public void hurt(ScoreLabel l) {
 		musicMonster();
@@ -106,16 +211,16 @@ public class Monster extends Pane{
     	int newScore = 0;
 		switch (type) {
     	case TYPE_0:
-    		newScore = score - 5;
+    		newScore = score - 30;
      	    break;
     	case TYPE_1:
-    		newScore = score - 10;
+    		newScore = score - 40;
     	    break;
     	case TYPE_2:
-    		newScore = score - 15;
+    		newScore = score - 50;
     	    break;
     	case TYPE_3:
-    		newScore = score - 18;
+    		newScore = score - 60;
     	    break;
     	}
 		if(newScore > 0) {
@@ -137,7 +242,7 @@ public class Monster extends Pane{
 	}
 	
 		public void musicMonster(){
-		    //String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
+		//    String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
 		    String bip = "src/view/resources/monster1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerOver = new MediaPlayer(hit);
@@ -146,7 +251,7 @@ public class Monster extends Pane{
 		
 		public void musicOver(){
 			ViewManager.mediaPlayer.stop();
-		    //String bip = "C:\\Users\\Liza\\Downloads\\fail1.mp3";
+		  //  String bip = "C:\\Users\\Liza\\Downloads\\fail1.mp3";
 		    String bip = "src/view/resources/fail1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerMonster = new MediaPlayer(hit);
