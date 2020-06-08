@@ -1,9 +1,12 @@
 package view;
 
 import java.nio.file.Paths;
+
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -235,12 +238,19 @@ public class Monster extends Pane{
 			musicOver();
 			gameOverImage = new Image(getClass().getResourceAsStream("/view/resources/gameOver.png"));
 			gameOverImageView = new ImageView(gameOverImage);
-			gameOverImageView.setTranslateX(120);
-	        gameOverImageView.setTranslateY(250);
+			gameOverImageView.setTranslateX(50);
+	        gameOverImageView.setTranslateY(200);
 			GameViewManager.gamePane.getChildren().add(gameOverImageView);
+			EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+				   @Override 
+				   public void handle(MouseEvent e) { 
+					   GameViewManager.restart();
+				   }
+			};
+			gameOverImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 		}
 	}
-	
+
 		public void musicMonster(){
 		//    String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
 		    String bip = "src/view/resources/monster1.mp3";

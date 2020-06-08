@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -28,18 +29,18 @@ public class GameViewManager {
 
 	public static AnchorPane gamePane;
 	private Scene gameScene;
-	private Stage gameStage;
+	private static Stage gameStage;
 	private Stage menuStage;
 	private boolean pause = false;
 	private AnimationTimer timer;
 	public static ArrayList<Block> blocks = new ArrayList<>();
 	public static ArrayList<Monster> monsters = new ArrayList<>();
 	public static ArrayList<Bonus> bonuses = new ArrayList<>();
-	private final static int GAME_HEIGHT = 800;
-	private final static int GAME_WIDTH = 800;
-	public final static int BLOCK_SIZE = 40;
-	public final static int CHARACTER_SIZE = 35;
-	public final static int BONUS_SIZE = 35;
+	public final static int BLOCK_SIZE = 34;
+	private final static int GAME_HEIGHT = BLOCK_SIZE*20;
+	private final static int GAME_WIDTH = BLOCK_SIZE*20;
+	public final static int CHARACTER_SIZE = 27;
+	public final static int BONUS_SIZE = 27;
 	private int levelWidth;
 	private static int levelNumber = 0;
 	private static int levelStatus = 1;
@@ -82,7 +83,7 @@ public class GameViewManager {
 		Image shieldImg = new Image("view/resources/b3.png");
      	shield = new ImageView(shieldImg);
      	shield.setLayoutX(170);
-     	shield.setLayoutY(5);
+     	shield.setLayoutY(2);
      	shield.setFitWidth(30);
 	    shield.setFitHeight(30);
 		
@@ -99,6 +100,7 @@ public class GameViewManager {
 		timer.start();	
 	}
 	
+
 /**
  * allows to move to the next level
  */
@@ -144,19 +146,21 @@ public class GameViewManager {
 		
 		
 		life = new ScoreLabel(lifeLeft);
-		life.setLayoutX(500);
-		life.setLayoutY(-185);
+		life.setLayoutX(470);
+		life.setLayoutY(-189);
 		gamePane.getChildren().add(life);
 		
 		level = new ScoreLabel("Level " + levelStatus);
 		level.setLayoutX(200);
-		level.setLayoutY(-185);
+		level.setLayoutY(-189);
 		gamePane.getChildren().add(level);
 		
 		createMuteButton();
 		
 		Image heartImage = new Image("view/resources/smallHeart.png");
      	ImageView heartV = new ImageView(heartImage);
+     	heartV.setFitWidth(25);
+     	heartV.setFitHeight(25);
      	heartV.setLayoutX(480);
      	heartV.setLayoutY(0);
      	gamePane.getChildren().add(heartV);
@@ -164,20 +168,33 @@ public class GameViewManager {
 		levelStatus++;
 		levelNumber++;
 		player = new PacMan();
-		player.setTranslateX(41);
-		player.setTranslateY(81);
+		player.setTranslateX(35);
+		player.setTranslateY(68);
 		gamePane.getChildren().add(player);
+		if (hasShield) {
+			gamePane.getChildren().add(shield);
+		}
 		}else {
 			gamePane.getChildren().clear();
 
 			ViewManager.mediaPlayer.stop();
 			musicWin();
-
+			gamePane.getChildren().clear();
+			blocks.clear();
+			monsters.clear();
+			bonuses.clear();
 			theEndImage = new Image("/view/resources/theEnd.png");
 			theEndImageView = new ImageView(theEndImage);
-			theEndImageView.setTranslateX(180);
-			theEndImageView.setTranslateY(300);
+			theEndImageView.setTranslateX(130);
+			theEndImageView.setTranslateY(250);
 			gamePane.getChildren().add(theEndImageView);
+			EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+				   @Override 
+				   public void handle(MouseEvent e) { 
+					   GameViewManager.restart();
+				   }
+			};
+			theEndImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
 			}
 	}
 	/*	gameScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -313,8 +330,8 @@ public class GameViewManager {
 
 	private static void createMuteButton() {
     	ButtonMute muteButton = new ButtonMute();
-    	muteButton.setLayoutX(10);
-    	muteButton.setLayoutY(5);
+    	muteButton.setLayoutX(5);
+    	muteButton.setLayoutY(0);
     	gamePane.getChildren().add(muteButton);
     	muteButton.setOnAction(new EventHandler<ActionEvent>() {
     		@Override
@@ -340,4 +357,20 @@ public class GameViewManager {
 				    mediaPlayerWin = new MediaPlayer(hit);
 				  mediaPlayerWin.play();
 				}
+
+			public static void restart() {
+				gamePane.getChildren().clear();
+				blocks.clear();
+				monsters.clear();
+				bonuses.clear();
+				String lifeLeft = "100";
+				life.setText(lifeLeft);
+				hasShield = false;
+//				levelNumber = 0;
+//				levelStatus = 1;
+				player = null;
+				
+				ViewManager view = new ViewManager();
+				view.createNewMenu(gameStage);
+			}
 }

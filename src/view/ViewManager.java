@@ -35,6 +35,7 @@ public class ViewManager {
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
+	private Stage gameStage;
 	private final static int MENU_BUTTONS_START_X = 100;
 	private final static int MENU_BUTTONS_START_Y = 150;
 	private PacManSubscene startSubscene;
@@ -63,13 +64,21 @@ public class ViewManager {
 		createLogo();
 		createBackground();
 		//  bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
-		bip = "view/resources/sound.mp3";
+		bip = "src/view/resources/sound.mp3";
 		     hit = new Media(Paths.get("src/view/resources/sound.mp3").toUri().toString());
 		   hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayer = new MediaPlayer(hit);
 		    mediaPlayer.play();
 		    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		}
+	
+	public void createNewMenu(Stage game) {
+		this.gameStage = game;
+		this.gameStage.hide();
+		this.gameStage.setResizable(false);
+		gameStage.setResizable(false);
+		mainStage.show();
+	}
 
 /**
  * getMainStage
