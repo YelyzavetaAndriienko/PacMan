@@ -35,6 +35,7 @@ public class ViewManager {
 	private AnchorPane mainPane;
 	private Scene mainScene;
 	private Stage mainStage;
+	private Stage gameStage;
 	private final static int MENU_BUTTONS_START_X = 100;
 	private final static int MENU_BUTTONS_START_Y = 150;
 	private PacManSubscene startSubscene;
@@ -63,13 +64,21 @@ public class ViewManager {
 		createLogo();
 		createBackground();
 		//  bip = "C:\\Users\\Liza\\Downloads\\sound.mp3";
-		bip = "view/resources/sound.mp3";
+		bip = "src/view/resources/sound.mp3";
 		     hit = new Media(Paths.get("src/view/resources/sound.mp3").toUri().toString());
 		   hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayer = new MediaPlayer(hit);
 		    mediaPlayer.play();
 		    mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		}
+	
+	public void createNewMenu(Stage game) {
+		this.gameStage = game;
+		this.gameStage.hide();
+		this.gameStage.setResizable(false);
+		gameStage.setResizable(false);
+		mainStage.show();
+	}
 
 /**
  * getMainStage
@@ -162,7 +171,7 @@ public class ViewManager {
      	img.setLayoutY(132);
      	helpSubscene.getPane().getChildren().add(img);
 
-     	InfoLabel green = new InfoLabel("GREEN");
+   /*  	InfoLabel green = new InfoLabel("GREEN");
      	green.setLayoutX(50);
      	green.setLayoutY(-80);
     	helpSubscene.getPane().getChildren().add(green);
@@ -172,26 +181,26 @@ public class ViewManager {
      	img1.setLayoutX(90);
      	img1.setLayoutY(132);
      	helpSubscene.getPane().getChildren().add(img1);
-
+*/
      	InfoLabel purple = new InfoLabel("PURPLE");
-     	purple.setLayoutX(150);
+     	purple.setLayoutX(50);
      	purple.setLayoutY(-80);
     	helpSubscene.getPane().getChildren().add(purple);
 
      	Image image2 = new Image("view/resources/m2.gif");
      	ImageView img2 = new ImageView(image2);
-     	img2.setLayoutX(200);
+     	img2.setLayoutX(90);
      	img2.setLayoutY(132);
      	helpSubscene.getPane().getChildren().add(img2);
 
      	InfoLabel red = new InfoLabel("RED");
-     	red.setLayoutX(260);
+     	red.setLayoutX(160);
      	red.setLayoutY(-80);
     	helpSubscene.getPane().getChildren().add(red);
 
      	Image image3 = new Image("view/resources/m3.gif");
      	ImageView img3 = new ImageView(image3);
-     	img3.setLayoutX(290);
+     	img3.setLayoutX(180);
      	img3.setLayoutY(132);
      	helpSubscene.getPane().getChildren().add(img3);
 
@@ -200,21 +209,21 @@ public class ViewManager {
     	helpLabel1.setLayoutY(0);
     	helpSubscene.getPane().getChildren().add(helpLabel1);
 
-    	Image image22 = new Image("view/resources/b2.gif");
+   /* 	Image image22 = new Image("view/resources/b2.gif");
      	ImageView img22 = new ImageView(image22);
      	img22.setLayoutX(10);
      	img22.setLayoutY(230);
-     	helpSubscene.getPane().getChildren().add(img22);
+     	helpSubscene.getPane().getChildren().add(img22);*/
 
     	Image image11 = new Image("view/resources/b1.gif");
      	ImageView img11 = new ImageView(image11);
-     	img11.setLayoutX(80);
+     	img11.setLayoutX(10);
      	img11.setLayoutY(240);
      	helpSubscene.getPane().getChildren().add(img11);
 
      	Image image33 = new Image("view/resources/b3.png");
      	ImageView img33 = new ImageView(image33);
-     	img33.setLayoutX(190);
+     	img33.setLayoutX(120);
      	img33.setLayoutY(240);
      	helpSubscene.getPane().getChildren().add(img33);
     }

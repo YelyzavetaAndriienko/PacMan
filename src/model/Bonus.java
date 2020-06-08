@@ -64,6 +64,7 @@ public class Bonus extends Pane {
  * @param l
  */
 	 public void action(ScoreLabel l) {
+		 GameViewManager.bonuses.remove(this);
 		 switch (type) {
          case HEART:
              heartAction(l);
@@ -95,7 +96,7 @@ public class Bonus extends Pane {
 	    private void heartAction(ScoreLabel l){
 	    	int score = Integer.parseInt(l.getText());
 	    	int newScore = 0;
-	    	if(score<80) {
+	    	if(score<=80) {
 		    	newScore = score + 20;
 		    	String textScore = String.valueOf(newScore);
 		        l.setText(textScore);

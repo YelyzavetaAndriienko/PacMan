@@ -1,9 +1,12 @@
 package view;
 
 import java.nio.file.Paths;
+
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -17,6 +20,8 @@ public class Monster extends Pane{
 	Image monsterImage, gameOverImage;
     ImageView imageView, gameOverImageView;
     public static MediaPlayer mediaPlayerMonster, mediaPlayerOver;
+    static Image  restartImage;
+    static ImageView  restartImageView;
     public enum MonsterType {
         TYPE_0, TYPE_1, TYPE_2, TYPE_3
     }
@@ -57,88 +62,11 @@ public class Monster extends Pane{
        GameViewManager.gamePane.getChildren().add(this);
     }
     
-    public void moveX() {
-        boolean movingRight = true;
-        for(int i = 0; i<1; i++) {
-            for (Node platform : GameViewManager.blocks) {
-                if(this.getBoundsInParent().intersects(platform.getBoundsInParent())) {
-                    if (movingRight) {
-                        if (this.getTranslateX() + GameViewManager.CHARACTER_SIZE == platform.getTranslateX()){
-                            this.setTranslateX(this.getTranslateX() - 1);
-                            movingRight = false;
-                            return;
-                        }else {
-                        	this.setTranslateX(this.getTranslateX() + 1);
-                        	movingRight = true;
-                            return;
-                        }
-                    } else {
-                        if (this.getTranslateX() == platform.getTranslateX() + GameViewManager.BLOCK_SIZE) {
-                            this.setTranslateX(this.getTranslateX() + 1);
-                            movingRight = true;
-                            return;
-                        }else {
-                        	this.setTranslateX(this.getTranslateX() - 1);
-                            movingRight = false;
-                            return;
-                        }
-                    }
-                }
-            }
-            if (movingRight) {
-            this.setTranslateX(this.getTranslateX() + 1);
-            }
-        }
-    }
-    
-    public void moveY(){
-        boolean movingDown = true;
-        boolean movingUp = false;
-        for(int i = 0; i < 1; i++){
-            for(Block platform :GameViewManager.blocks){
-                if(getBoundsInParent().intersects(platform.getBoundsInParent())){
-                    if(movingDown){
-                        if(this.getTranslateY()+ GameViewManager.CHARACTER_SIZE == platform.getTranslateY()){
-                            this.setTranslateY(this.getTranslateY()-1);
-                            movingUp = true;
-                            movingDown = false;
-                            return;
-                        }else {
-                        	this.setTranslateY(this.getTranslateY() + 1);
-                        	movingDown = true;
-                        	movingUp = false;
-                            return;
-                        }
-                    }
-                    else{
-                        if(this.getTranslateY() == platform.getTranslateY()+ GameViewManager.BLOCK_SIZE){
-                            this.setTranslateY(this.getTranslateY()+1);
-                            movingDown = true;
-                            movingUp = false;
-                            return;
-                        }else {
-                        	this.setTranslateY(this.getTranslateY() - 1);
-                        	movingUp = true;
-                        	movingDown = false;
-                            return;
-                        }
-                    }
-                }
-            }
-            if (movingDown) {
-                this.setTranslateY(this.getTranslateX() + 1);
-                }
-                if (movingUp) {
-                    this.setTranslateY(this.getTranslateX() - 1);
-                    }
-        }
-    }
-    
 /**
  * move of X coordinate
  * @param value
  */
-	/*public void moveX(int value) {
+	public void moveX(int value) {
         boolean movingRight = value > 0;
         for(int i = 0; i<Math.abs(value); i++) {
             for (Node platform : GameViewManager.blocks) {
@@ -164,13 +92,13 @@ public class Monster extends Pane{
             }
             this.setTranslateX(this.getTranslateX() + (movingRight ? 1 : -1));
         }
-    }*/
+    }
     
 /**
  * move of Y coordinate    
  * @param value
  */
-   /* public void moveY(int value){
+   public void moveY(int value){
         boolean movingDown = value > 0;
         for(int i = 0; i < Math.abs(value); i++){
             for(Block platform :GameViewManager.blocks){
@@ -198,8 +126,7 @@ public class Monster extends Pane{
             this.setTranslateY(this.getTranslateY() + (movingDown?1:-1));
         }
     }
-   */ 
-
+   
 	public void hurt(ScoreLabel l) {
 		musicMonster();
 		if (GameViewManager.hasShield) {
@@ -235,14 +162,36 @@ public class Monster extends Pane{
 			musicOver();
 			gameOverImage = new Image(getClass().getResourceAsStream("/view/resources/gameOver.png"));
 			gameOverImageView = new ImageView(gameOverImage);
-			gameOverImageView.setTranslateX(120);
-	        gameOverImageView.setTranslateY(250);
+			gameOverImageView.setTranslateX(50);
+	        gameOverImageView.setTranslateY(200);
 			GameViewManager.gamePane.getChildren().add(gameOverImageView);
+		/*	EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+				   @Override 
+				   public void handle(MouseEvent e) { 
+					   GameViewManager.restart();
+				   }
+			};
+			gameOverImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);*/
+			restartImage = new Image("/view/resources/restart1.png");
+			restartImageView = new ImageView(restartImage);
+			restartImageView.setFitWidth(100);
+			restartImageView.setFitHeight(100);
+			restartImageView.setTranslateX(310);
+			restartImageView.setTranslateY(530);
+			GameViewManager.gamePane.getChildren().add(restartImageView);
+			EventHandler<MouseEvent> eventHandler = new EventHandler<MouseEvent>() { 
+				   @Override 
+				   public void handle(MouseEvent e) { 
+					   GameViewManager.restart();
+				   }
+			};
+			restartImageView.addEventHandler(MouseEvent.MOUSE_CLICKED, eventHandler);
+			
 		}
 	}
-	
+
 		public void musicMonster(){
-		//    String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
+		   // String bip = "C:\\Users\\Liza\\Downloads\\monster1.mp3";
 		    String bip = "src/view/resources/monster1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerOver = new MediaPlayer(hit);
@@ -251,8 +200,8 @@ public class Monster extends Pane{
 		
 		public void musicOver(){
 			ViewManager.mediaPlayer.stop();
-		  //  String bip = "C:\\Users\\Liza\\Downloads\\fail1.mp3";
-		    String bip = "src/view/resources/fail1.mp3";
+		 //  String bip = "C:\\Users\\Liza\\Downloads\\fail1.mp3";
+		   String bip = "src/view/resources/fail1.mp3";
 		    Media hit = new Media(Paths.get(bip).toUri().toString());
 		    mediaPlayerMonster = new MediaPlayer(hit);
 		    mediaPlayerMonster.play();

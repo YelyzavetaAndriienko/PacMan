@@ -55,8 +55,7 @@ public class PacMan extends Pane {
             try {
             	for (Bonus bonus : GameViewManager.bonuses) {
 	            	  if(this.getBoundsInParent().intersects(bonus.getBoundsInParent())) {
-	                     bonus.action(GameViewManager.life);
-	                     GameViewManager.bonuses.remove(bonus);
+	                     bonus.action(GameViewManager.life); 
 	            	  }
             	}
             }
